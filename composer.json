@@ -2,8 +2,8 @@
     "name": "orbiter/hydrator",
     "license": "MIT",
     "homepage": "https://bemit.codes",
-    "version": "0.0.1",
-    "description": "PHP Object Hydrator using Reflection with PSR Container support.",
+    "version": "0.1.0",
+    "description": "PHP Object Hydrator using Reflection.",
     "require": {
         "php": "~8.0||~8.1",
         "psr/container": "^1.0|^2.0",

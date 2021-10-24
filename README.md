@@ -7,25 +7,37 @@
 [![Github actions Build](https://github.com/bemit/orbiter-hydrator/actions/workflows/blank.yml/badge.svg)](https://github.com/bemit/orbiter-hydrator/actions)
 [![PHP Version Require](http://poser.pugx.org/orbiter/hydrator/require/php)](https://packagist.org/packages/orbiter/hydrator)
 
-Hydrator to create PHP classes from data, using Reflections and PSR Container.
+Hydrator to create PHP objects from data, using Reflections, use e.g. PSR Container through a [FactoryInterface](https://github.com/bemit/orbiter-hydrator/blob/master/src/FactoryInterface.php).
 
 ```shell
 composer require orbiter/hydrator
 ```
 
 ```injectablephp
-// needs implementations:
-// $container = \Psr\Container\ContainerInterface()
+// needs implementation:
 // $factory = \Orbiter\Hydrator\FactoryInterface()
 $hydrator = new \Orbiter\Hydrator\Hydrator($factory);
+
+// params = e.g. most likely used by your factory for __construct, array of params
 $hydrator->make($class_name, $params);
+
+// data = use to hydrate after instance creation, can be associative array or stdClass
+//        uses keys/properties as names for the property to inject
+// third parameter = true ignores missing properties
 $hydrator->hydrate($class, $data, false);
 $hydrator->makeAndInject($class_name, $data, false, $params);
 
+//
 // for PHP-DI users:
-$hydrator = new \Orbiter\Hydrator\Hydrator(
-  new \Orbiter\Hydrator\BridgePHPDIFactory(new \DI\Container())
-);
+use function DI\autowire;
+use function DI\get;
+
+$dependencies = [
+    Orbiter\Hydrator\BridgePHPDIFactory::class => autowire()
+        ->constructorParameter('factory', get(DI\FactoryInterface::class)),
+    Orbiter\Hydrator\Hydrator::class => autowire()
+        ->constructorParameter('factory', get(Orbiter\Hydrator\BridgePHPDIFactory::class)),
+]
 ```
 
 ## Dev Notices
