@@ -48,16 +48,16 @@ Commands to set up and run e.g. tests:
 # on windows:
 docker run -it --rm -v %cd%:/app composer install
 
-docker run -it --rm -v %cd%:/var/www/html php:8-cli-alpine sh
+docker run -it --rm -v %cd%:/var/www/html php:8.1-cli-alpine sh
 
-docker run --rm -v %cd%:/var/www/html php:8-cli-alpine sh -c "cd /var/www/html && ./vendor/bin/phpunit --testdox -c phpunit-ci.xml --bootstrap vendor/autoload.php"
+docker run --rm -v %cd%:/var/www/html php:8.1-cli-alpine sh -c "cd /var/www/html && ./vendor/bin/phpunit --testdox -c phpunit-ci.xml --bootstrap vendor/autoload.php"
 
 # on unix:
 docker run -it --rm -v `pwd`:/app composer install
 
-docker run -it --rm -v `pwd`:/var/www/html php:8-cli-alpine sh
+docker run -it --rm -v `pwd`:/var/www/html php:8.1-cli-alpine sh
 
-docker run --rm -v `pwd`:/var/www/html php:8-cli-alpine sh -c "cd /var/www/html && ./vendor/bin/phpunit --testdox -c phpunit-ci.xml --bootstrap vendor/autoload.php"
+docker run --rm -v `pwd`:/var/www/html php:8.1-cli-alpine sh -c "cd /var/www/html && ./vendor/bin/phpunit --testdox -c phpunit-ci.xml --bootstrap vendor/autoload.php"
 ```
 
 ## Versions
